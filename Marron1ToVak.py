@@ -1,8 +1,7 @@
 import os
 import pandas as pd
 
-# Chemin du dossier contenant les fichiers CSV
-folder_path = 'chemin/vers/le/dossier'
+folder_path = 'Chemin du dossier contenant les fichiers CSV'
 
 all_files = os.listdir(folder_path)
 

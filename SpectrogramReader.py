@@ -34,7 +34,6 @@ def display_spectrograms_from_folder(folder_path):
         else:
             print(f"Clé 'feature' non trouvée dans {file_name}")
 
-# Spécifiez le chemin du dossier contenant les fichiers .npz
-folder_path = 'C:/Users/clemd/OneDrive/Bureau/CanapyNathan/canapy/bird1_output/spectrograms'  # Remplacez par votre chemin
+folder_path = 'Chemin du dossier contenant les fichiers .npz'  # Remplacez par votre chemin
 # Appeler la fonction pour afficher les spectrogrammes
 display_spectrograms_from_folder(folder_path)

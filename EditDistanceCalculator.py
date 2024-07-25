@@ -64,8 +64,8 @@ def calculate_edit_distances(folder1, folder2):
     return edit_distances, total_edit_distance
 
 
-folder1 = 'C:/Users/clemd/OneDrive/Bureau/CanapyNathan/Dataset_Marron1'
-folder2 = 'C:/Users/clemd/OneDrive/Bureau/CanapyNathan/bird1_output/corrected_annotations'
+folder1 = 'Chemin vers le 1er dossier d"annotations'
+folder2 = 'Chemin vers le 2ème dossier d"annotations'
 
 edit_distances, total_edit_distance = calculate_edit_distances(folder1, folder2)
 

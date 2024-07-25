@@ -75,7 +75,7 @@ def merge_and_transform_csv_files(directory, output_file, total_duration):
 
     return merged_df
 
-directory = 'C:/Users/clemd/OneDrive/Bureau/CanapyNathan/Dataset'
+directory = 'Chemin vers le dataset avec audios et annotations'
 output_wav_file = 'combined.wav'
 output_csv_file = 'merged.csv'
 

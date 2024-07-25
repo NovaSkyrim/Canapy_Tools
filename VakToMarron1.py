@@ -1,8 +1,7 @@
 import os
 import pandas as pd
 
-# Chemin du dossier contenant les fichiers .csv
-folder_path = 'C:/Users/clemd/OneDrive/Bureau/Pro/INRIA/INRIA/Recherche/ML_ComparisonTests/Vak_Dataset_Test'
+folder_path = 'Chemin du dossier contenant les fichiers .csv'
 
 for filename in os.listdir(folder_path):
     if filename.endswith('.wav.csv'):
@@ -16,6 +15,6 @@ for filename in os.listdir(folder_path):
 
         df.columns = ['', 'wave', 'start', 'end', 'syll']
 
-        output_filepath = os.path.join('C:/Users/clemd/OneDrive/Bureau/Pro/INRIA/INRIA/Recherche/ML_ComparisonTests/output', filename.replace('.wav.csv', '.csv'))
+        output_filepath = os.path.join('OUTPUT DIRECTORY', filename.replace('.wav.csv', '.csv'))
 
         df.to_csv(output_filepath, index=False)
