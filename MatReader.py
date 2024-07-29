@@ -2,7 +2,7 @@ import scipy.io
 
 import numpy as np
 
-mat_file_path = 'Chemin vers le fichier .mat'
+mat_file_path = "D:\Vak-Canary-Dataset\llb3_annotation.mat"
 
 # Charger le fichier .mat
 mat_contents = scipy.io.loadmat(mat_file_path)
