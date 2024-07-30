@@ -30,10 +30,8 @@ def process_files(audio_path, annotation_path):
     features = []
     syllable_labels = []
 
-    # Charger les annotations depuis le fichier CSV
     annotations = pd.read_csv(annotation_path)
 
-    # Charger le fichier audio
     y, sr = librosa.load(audio_path, sr=None)
 
     for index, row in annotations.iterrows():
@@ -54,7 +52,7 @@ def main(directory_path):
     csv_files = glob.glob(os.path.join(directory_path, '*.csv'))
     wav_files = glob.glob(os.path.join(directory_path, '*.wav'))
 
-    # Créer un dictionnaire pour un appariement rapide des fichiers CSV et WAV
+    # Créer un dictionnaire des fichiers CSV et WAV
     csv_dict = {os.path.basename(f).replace('.csv', ''): f for f in csv_files}
     wav_dict = {os.path.basename(f).replace('.wav', ''): f for f in wav_files}
 
@@ -80,16 +78,16 @@ def main(directory_path):
     unique_labels = list(set(all_labels))
     label_indices = [unique_labels.index(label) for label in all_labels]
 
-    # Afficher les résultats UMAP
     plt.figure(figsize=(12, 8))
     scatter = plt.scatter(X_umap[:, 0], X_umap[:, 1], c=label_indices, cmap='Spectral', s=10, alpha=0.7)
 
-    # Légende du graph
     plt.legend(handles=scatter.legend_elements()[0], labels=unique_labels, title="Syllabes")
     plt.title('Projection UMAP des Syllabes d\'Oiseaux')
     plt.xlabel('UMAP 1')
     plt.ylabel('UMAP 2')
+    plt.savefig(output_file, format='png', dpi=300)
     plt.show()
 
 directory_path = 'D:/Albane-datasets/datasets/marron1/marron1_annotated/marron1_dataset'
+output_file = 'umap_projection.png'
 main(directory_path)
