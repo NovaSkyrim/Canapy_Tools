@@ -17,26 +17,25 @@ def extract_labels_from_csv_files(directory):
         else:
             print(f"La colonne 'label' n'existe pas dans le fichier {file}")
 
-    labels_string = ''.join(all_labels)
-    return labels_string
+    return all_labels
 
 
 def extract_labels_from_reference_csv(file_path):
     df = pd.read_csv(file_path)
     if 'label' in df.columns:
         labels = df['label']
-        labels_string = ''.join(map(str, labels))
-        return labels_string
+        return list(map(str, labels))
     else:
         raise ValueError("La colonne 'label' n'existe pas dans le fichier de référence")
 
 
 def compare_labels(directory_path, reference_file_path):
-    labels_string_from_directory = extract_labels_from_csv_files(directory_path)
-    labels_string_from_reference = extract_labels_from_reference_csv(reference_file_path)
+    labels_list_from_directory = extract_labels_from_csv_files(directory_path)
+    labels_list_from_reference = extract_labels_from_reference_csv(reference_file_path)
 
-    distance = levenshtein_distance(labels_string_from_directory, labels_string_from_reference)
-    syllable_error_rate = (distance / len(labels_string_from_reference)) * 100
+    distance = levenshtein_distance(labels_list_from_directory, labels_list_from_reference)
+
+    syllable_error_rate = (distance / len(labels_list_from_reference)) * 100
 
     return distance, syllable_error_rate
 
