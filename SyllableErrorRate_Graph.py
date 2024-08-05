@@ -2,12 +2,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
 
-x_values = [30, 45, 75, 180, 600]
+x_values = [30, 45, 75, 120, 180, 480, 600]
 y_values = {
     30: [5.36, 7.24, 7.06, 5.64, 4.78],
     45: [3.63, 5.33, 4.28, 4.99, 4.96],
     75: [4.02, 3.59, 2.61, 3.59, 3.69],
+    120: [3.25, 2.68, 3.86, 3.61, 2.64],
     180: [3.52, 2.59, 2.5, 2.85, 3.04],
+    480: [2.24, 2.66, 2.45, 1.86, 2.62],
     600: [2.43, 2.29, 1.91, 2.66, 3.26]
 }
 
@@ -29,11 +31,11 @@ plt.figure(figsize=(10, 6))
 
 plt.scatter(x_all, y_all, color='gray', alpha=0.6)
 
-plt.errorbar(x_values, means, yerr=std_devs, fmt='o', color='red', ecolor='lightgray', elinewidth=3, capsize=5, label='Moyenne')
+plt.errorbar(x_values, means, yerr=std_devs, fmt='o', color='red', ecolor='lightgray', elinewidth=3, capsize=5, label='Mean')
 
 plt.plot(x_new, y_new, '-', color='blue')
 
-plt.fill_between(x_new, y_new - std_dev_new, y_new + std_dev_new, color='lightblue', alpha=0.4, label='Écart-type')
+plt.fill_between(x_new, y_new - std_dev_new, y_new + std_dev_new, color='lightblue', alpha=0.4, label='Standard deviation')
 
 plt.xticks(x_values)
 
@@ -42,4 +44,5 @@ plt.xlabel('Training set duration (s)')
 plt.ylabel('Syllable error rate (%)')
 plt.legend()
 plt.grid(True)
+#plt.savefig('tweetynet_syllable_error_rate_bengalese.png', format='png', dpi=300)
 plt.show()

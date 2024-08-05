@@ -82,12 +82,10 @@ def main(directory_path):
     scatter = plt.scatter(X_umap[:, 0], X_umap[:, 1], c=label_indices, cmap='Spectral', s=10, alpha=0.7)
 
     plt.legend(handles=scatter.legend_elements()[0], labels=unique_labels, title="Syllabes")
-    plt.title('Projection UMAP des Syllabes d\'Oiseaux')
-    plt.xlabel('UMAP 1')
-    plt.ylabel('UMAP 2')
+    plt.title('Projection UMAP de Marron1')
     plt.savefig(output_file, format='png', dpi=300)
     plt.show()
 
-directory_path = 'D:/Albane-datasets/datasets/marron1/marron1_annotated/marron1_dataset'
+directory_path = 'Dataset_Marron1 PATH'
 output_file = 'umap_projection.png'
 main(directory_path)
