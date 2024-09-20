@@ -1,24 +1,32 @@
+import random
 import sys
 sys.path.append('D:/Inria/canapy')
+import pandas as pd
 from canapy import Corpus
 from canapy.annotator import SynAnnotator
 from canapy.annotator import Annotator
-import pandas as pd
+
+def update_train_column(df, num_files):
+    
+    unique_files = df['annot_path'].unique()
+    
+    if num_files > len(unique_files):
+        raise ValueError(f"Le nombre de fichiers demandés ({num_files}) est supérieur au nombre de fichiers disponibles ({len(unique_files)}).")
+    
+    selected_files = random.sample(list(unique_files), num_files)
+
+    df = df.assign(train=False)
+    
+    df['train'] = df['annot_path'].apply(lambda x: True if x in selected_files else False)
+    
+    df.to_csv("D:/Inria/Experiments/DATASIZE/Gy6or6_DATASIZE_10iter/1/30/Split.csv", index=False)
+    
+    return df
 
 dataset_path = "D:/Inria/Datasets/gy6or6_dataset/gy6or6_marron1"
-output_path = "output"
-save_model_path = "output"
-test_set_csv = "D:/Inria/Experiments/DATASIZE/Tests_datasize/1/test_set.csv"
-train_set_csv = "D:/Inria/Experiments/DATASIZE/Tests_datasize/1/train_set.csv"
+output_path = "D:/Inria/Experiments/DATASIZE/Marron1_DATASIZE_10iter/1/30/Annots"
+save_model_path = "D:/Inria/Experiments/DATASIZE/Marron1_DATASIZE_10iter/1/30/model"
 audio_directory = "D:/Inria/Datasets/gy6or6_dataset/gy6or6_Audios"
-
-# Charger les fichiers CSV
-test_set_df = pd.read_csv(test_set_csv)
-train_set_df = pd.read_csv(train_set_csv)
-
-# Extraire les seqid uniques
-test_set_seqs = test_set_df['seqid'].unique()
-train_set_seqs = train_set_df['seqid'].unique()
 
 if __name__ == '__main__':
 
@@ -32,6 +40,8 @@ if __name__ == '__main__':
   print(corpus.dataset)
 
   annotator = SynAnnotator()
+
+  corpus.dataset = update_train_column(corpus.dataset, 30)
 
   annotator.fit(corpus)
 
