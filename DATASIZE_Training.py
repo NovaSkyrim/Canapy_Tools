@@ -24,8 +24,8 @@ def update_train_column(df, num_files):
     return df
 
 dataset_path = "D:/Inria/Datasets/gy6or6_dataset/gy6or6_marron1"
-output_path = "D:/Inria/Experiments/DATASIZE/Marron1_DATASIZE_10iter/1/30/Annots"
-save_model_path = "D:/Inria/Experiments/DATASIZE/Marron1_DATASIZE_10iter/1/30/model"
+output_path = "D:/Inria/Experiments/DATASIZE/Gy6or6_DATASIZE_10iter/1/30/Annots"
+save_model_path = "D:/Inria/Experiments/DATASIZE/Gy6or6_DATASIZE_10iter/1/30/model"
 audio_directory = "D:/Inria/Datasets/gy6or6_dataset/gy6or6_Audios"
 
 if __name__ == '__main__':
