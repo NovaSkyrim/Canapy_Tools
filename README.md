@@ -39,5 +39,5 @@ Welcome to Canapy Tools! This repository contains a collection of scripts design
 - **Model_reader.py**: Reads the configuration of a model trained by Canapy.
 - **SimpleSeqToMarron1.py**: Converts an annotation folder from the SimpleSeq format to the Marron1 CSV format.
 - **UMAP_Marron1.py**: Displays a UMAP visualization of a dataset in Marron1 CSV format.
-- **WavCopy.py**: Copies .wav files from one directory to another.
+- **Wav_Copy.py**: Copies .wav files from one directory to another.
 - **Wav_Analyze.py**: Analyzes the temporal data of .wav audio files in a dataset, aiding in the decision of sequence values for a Datasize.
