@@ -2,7 +2,7 @@ import os
 import pandas as pd
 
 # Chemin du dossier contenant les fichiers CSV
-dossier_csv = "D:/Inria/Datasets/M1-2016-spring"  # Remplacez par le chemin de votre dossier
+dossier_csv = 'D:/Inria/Datasets/gr41rd51_dataset/gr41rd51_FULL_marron1'  # Remplacez par le chemin de votre dossier
 
 # Ensemble pour stocker les syllabes uniques
 syllabes_uniques = set()
@@ -15,12 +15,10 @@ for fichier in os.listdir(dossier_csv):
         # Lecture du fichier CSV dans un DataFrame
         df = pd.read_csv(chemin_fichier)
         
-        # Ajout des syllabes de la colonne 'syll' à l'ensemble
-        syllabes_uniques.update(df['syll'].unique())
+        # Conversion de la colonne 'syll' en chaînes de caractères et ajout à l'ensemble
+        syllabes_uniques.update(df['syll'].astype(str).unique())
 
 # Affichage des syllabes uniques
 print("Liste des syllabes uniques trouvées :")
-A = []
-for syllabe in sorted(syllabes_uniques):
-    A.append(syllabe)
+A = sorted(syllabes_uniques)  # Trie directement l'ensemble
 print(A)

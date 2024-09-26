@@ -51,8 +51,8 @@ def remove_consecutive_duplicates(s):
     return result
 
 
-directory_path = '/home/utilisateur/Documents/Canapy/canapy/Auto_marron1_output'
-reference_folder_path = '/home/utilisateur/Documents/Canapy/canapy/gy6or6_dataset/032312'
+directory_path = 'D:/Inria/Experiments/DATASIZE/Marron1_DATASIZE_10iter/1/9/Annots'
+reference_folder_path = "D:/Inria/Datasets/M1-2016-spring"
 
 distance, syllable_error_rate = compare_labels(directory_path, reference_folder_path)
 

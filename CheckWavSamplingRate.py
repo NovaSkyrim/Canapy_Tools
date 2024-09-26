@@ -15,6 +15,6 @@ def analyser_audio(wav_path):
     print(f"Longueur de saut (hop length) : {hop_length:.2f} s")
 
 # Exemple d'utilisation
-wav_path = '/home/utilisateur/Documents/Tweetynet/Canary_Dataset/llb11_dataset_marron1/llb11_00224_2018_05_04_12_51_23.wav'
+wav_path = 'example.wav'
 analyser_audio(wav_path)
 
