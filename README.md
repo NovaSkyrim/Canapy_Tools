@@ -43,6 +43,8 @@ canapy dash -a song_dataset/annotations -s song_dataset/audio -o output
 
 ### Basic Experiments
 
+@TODO: put filenames at the beginning of all files
+
 "Basic" refers to training the model on all available data for optimal performance across multiple seeds to evaluate its reliability:
 
 - **BASIC_Training_Annotation.py**: This script trains models and annotates a dataset across several seeds within a working directory.
