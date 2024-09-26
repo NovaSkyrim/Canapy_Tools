@@ -4,6 +4,35 @@ Welcome to Canapy Tools! This repository contains a collection of scripts design
 
 ## Getting Started with Canapy
 
+### Launch the Original Project
+
+#### 1. Set Up the Environment
+
+First, you need to set up a Python 3.11 environment with CUDA.
+
+Next, clone the repository:
+
+- Repository URL: [https://github.com/birds-canopy/canapy.git](https://github.com/birds-canopy/canapy.git)
+
+To install the dependencies, run the following command:
+
+```bash
+pip install -e <path_to_canapy_directory_containing_pyproject.toml>
+```
+#### 2. Verify the Main Branch and Launch the Dashboard
+
+Make sure you're on the main branch, and use one of the following commands to launch the dashboard with the specified dataset:
+
+```bash
+canapy dash -d D:\Inria\Datasets\M1-2016-spring -o output
+```
+
+If your audio files and annotations are in separate folders, use this command instead:
+
+```bash
+canapy dash -a song_dataset/annotations -s song_dataset/audio -o output
+```
+
 ### Main Scripts
 
 - **Canapy_Main_Pipeline.py**: Use this script to easily train a model and annotate unannotated audio files.
