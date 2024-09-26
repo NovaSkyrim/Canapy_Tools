@@ -1,3 +1,4 @@
+import shutil
 import pandas as pd
 import numpy as np
 import glob
@@ -70,11 +71,11 @@ def compute_frame_error_rate_statistics(gold_folder, pred_folder, sampling_rate,
     gold_files = sorted(os.listdir(gold_folder))
     pred_files = sorted(os.listdir(pred_folder))
 
-    # Filtrer les fichiers CSV
+    # Filter CSV files
     gold_files = [f for f in gold_files if f.endswith('.csv')]
     pred_files = [f for f in pred_files if f.endswith('.csv')]
 
-    # Assurer que les fichiers sont les mêmes
+    # Ensure that the files match
     if set(gold_files) != set(pred_files):
         raise ValueError("Files don't match between the two folders.")
 
@@ -115,7 +116,7 @@ def extract_labels_from_csv_files(directory):
         elif 'label' in df.columns:
             labels = df['label']
         else:
-            print(f"La colonne 'syll' ou 'label' n'existe pas dans le fichier {file}")
+            print(f"The column 'syll' or 'label' does not exist in the file {file}")
             continue
 
         filtered_labels = labels[(labels != 'SIL') & (labels != 'TRASH')]
@@ -128,8 +129,10 @@ def compare_labels(directory_path, reference_file_path):
     labels_list_from_reference = remove_consecutive_duplicates(extract_labels_from_csv_files(reference_file_path))
 
     distance = levenshtein_distance(labels_list_from_directory, labels_list_from_reference)
+    # The distance represents the number of edits (insertions and deletions) needed for the two lists to be identical
 
     syllable_error_rate = (distance / len(labels_list_from_reference)) * 100
+    # The syllable error rate is normalized and expressed as a percentage
 
     return distance, syllable_error_rate
 
@@ -141,12 +144,14 @@ def remove_consecutive_duplicates(s):
 
     return result
 
-dataset_path = "/home/utilisateur/Documents/Canapy/Datasets/Marron1Full"
+
+dataset_path = "/home/user/Documents/Canapy/Datasets/Marron1Full"  # Path to the folder containing the original annotations
 working_directory = "Path/To/Your/Working/Directory"
-bird_name = "Marron1"
-seeds_values = list(range(1, 11))
-sampling_rate = 44100
-hop_length = 512
+bird_name = "Marron1"  # Name of the working folder
+seeds_values = list(range(1, 11))  # Values of seeds used in the Basic
+sampling_rate = 44100  # Specify the sampling rate of the audio
+hop_length = 512  # Specify the hop_length of the audio
+
 
 results = []
 for i in ['Test', 'Train']:
@@ -155,20 +160,20 @@ for i in ['Test', 'Train']:
     elif i == 'Train':
         print("TRAIN STATS\n")
 
-    for seed in seeds_values :
+    for seed in seeds_values:
         directory_path = f'{working_directory}/{bird_name}/{seed}/{i}_set'
         reference_folder_path = f'{working_directory}/{bird_name}/{seed}/{i}_correction'
 
         distance, syllable_error_rate = compare_labels(directory_path, reference_folder_path)
         average_frame_error_rate, std_frame_error_rate = compute_frame_error_rate_statistics(reference_folder_path, directory_path, sampling_rate, hop_length)
 
-        print(f"Pour la seed {seed} du modèle syntaxique :")
+        print(f"For seed {seed} of the syntactic model:")
         print(f"Frame Error Rate mean: {average_frame_error_rate:.4f}")
         print(f"Frame Error Rate std_dev: {std_frame_error_rate:.4f}")
-        print(f"La distance d'édition entre les deux chaînes de caractères est : {distance}")
-        print(f"Le taux d'erreur des syllabes entre les deux chaînes de caractères est de : {round(syllable_error_rate, 2)}%\n")
+        print(f"The edit distance between the two strings is: {distance}")
+        print(f"The syllable error rate between the two strings is: {round(syllable_error_rate, 2)}%\n")
 
-        # Ajout des résultats dans la liste
+        # Add results to the list
         results.append({
             'Dataset': i,
             'Seed': seed,
@@ -177,9 +182,9 @@ for i in ['Test', 'Train']:
             'STD Frame Error Rate': std_frame_error_rate
         })
 
-# Conversion de la liste des résultats en DataFrame
+# Convert the results list to a DataFrame
 results_df = pd.DataFrame(results)
 
-# Enregistrement dans un fichier CSV
+# Save to a CSV file
 results_df.to_csv(f'{working_directory}/{bird_name}/results_summary.csv', index=False)
-print(f"Métriques enregistrées sous results_summary.csv")
+print(f"Metrics saved to results_summary.csv")

@@ -1,12 +1,14 @@
+import os
+import shutil
 import sys
 sys.path.append('chemin/vers/canapy')
 from canapy import Corpus
 from canapy.annotator import SynAnnotator
 from canapy.annotator import Annotator
 
-dataset_path = "chemin/vers/dataset"
-output_path = "chemin/vers/output"
-save_model_path = "chemin/vers/modele/sauvegarde"
+dataset_path = "chemin/vers/dataset" # Dossier contenant les annotations
+output_path = "chemin/vers/output" # Dossier où sera enregistré les annotations prédites
+save_model_file = "chemin/vers/le/modele" # Chemin où sera enregitré le modèle
 
 if __name__ == '__main__':
 
@@ -25,13 +27,17 @@ if __name__ == '__main__':
 
   print(annotator.vocab)
 
-  annotator.to_disk(save_model_path)
+  annotator.to_disk(save_model_file)
+
+  spectrograms_dir = os.path.join(dataset_path, "spectrograms")  # Remove the temporary spectrogram folder to avoid an error in Canapy
+  if os.path.exists(spectrograms_dir):
+    shutil.rmtree(spectrograms_dir)
 
   audio_directory = dataset_path
 
   corpus = Corpus.from_directory(audio_directory=audio_directory)
 
-  annotator = Annotator.from_disk(save_model_path)
+  annotator = Annotator.from_disk(save_model_file)
 
   corpus_avec_annotations = annotator.predict(corpus)
 

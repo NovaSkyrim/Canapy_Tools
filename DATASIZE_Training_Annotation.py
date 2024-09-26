@@ -216,6 +216,8 @@ if __name__ == '__main__':
             modifier_seed(annotator_init_path, seed)
 
             output_path = f"{working_directory}/{bird_name}/{seed}/{sequence}/Annots"
+            os.makedirs(output_path, exist_ok=True)
+            
             save_model_path = f"{working_directory}/{bird_name}/{seed}/{sequence}/annotator"
 
             corpus = Corpus.from_directory(
